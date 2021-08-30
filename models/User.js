@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: [ true, 'Please provide a username' ]
+        required: [ true, 'Please provide a username' ],
+        unique: true
     },
     email: {
         type: String,
@@ -56,6 +58,20 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpire: Date
 })
+
+userSchema.pre("save", async function(next){ //function keyword is important
+    if(!this.isModified('password')) {
+        next();
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+})
+
+userSchema.methods.matchpasswords = async function(password) { //function keyword is important
+    return await bcrypt.compare(password, this.password);       //this.password refers to the password to the model on which this function is called
+}       
 
 userSchema.methods.getSignedToken = function() {
     const payload = { _id: this._id };

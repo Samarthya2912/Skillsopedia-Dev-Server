@@ -1,0 +1,31 @@
+{
+  "name": "skillsopedia-dev-server",
+  "version": "1.0.0",
+  "description": "Skillsopedia backend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samarthya2912/Skillsopedia-Dev-Server.git"
+  },
+  "keywords": [
+    "skillsopedia"
+  ],
+  "author": "samarthya55@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samarthya2912/Skillsopedia-Dev-Server/issues"
+  },
+  "homepage": "https://github.com/Samarthya2912/Skillsopedia-Dev-Server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "14.17.4"
+  }
+}
